@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'creature/base.html' %}
 
-</body>
-</html>
+
+{% block content %}
+
+<h1>Adding an article</h1>
+
+<form action="{% url 'add_page' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for f in form %}
+        <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}: </label>{{ f }}</p>
+        <div class="form-error">{{ f.errors }}</div>
+    {% endfor %}
+
+    <button type="submit">Adding the article</button>
+</form>
+
+
+{% endblock %}
